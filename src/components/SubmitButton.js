@@ -13,6 +13,7 @@ const useStyles = makeStyles({
   wrapper: {
     columnGap: "15px",
     display: "flex",
+    alignSelf: "center",
   },
   buttonNonInteractive: {
     backgroundColor: tokens.colorNeutralBackground1,
@@ -31,14 +32,12 @@ const useStyles = makeStyles({
   },
 });
 
-
 export const SubmitButton = () => {
   const styles = useStyles();
 
-  const [loadingState, setLoadingState] =
-    React.useState("initial");
+  const [loadingState, setLoadingState] = React.useState("initial");
 
-//   const [setTimeout, cancelTimeout] = useTimeout();
+  //   const [setTimeout, cancelTimeout] = useTimeout();
 
   const onButtonClick = () => {
     setLoadingState("loading");
