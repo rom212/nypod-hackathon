@@ -22,24 +22,23 @@ async function getTest() {
 }
 
 
-async function getSummary(selectedItems=[], oss=false) {
-
- 
-  //prepping body
+async function getSummary(selectedItems=[], oss="no") {
   //may need to do clearn up on the and others
   const clients = [...selectedItems];
+  
+  // this is for testing
+  clients.push("ADP");
+  // clients.push("Yale");
+  // clients.push("J&J");
+  // this is for testing
+
   const options = [
     {oss: oss === "yes" ? true : false}
   ];
 
   // prepping url
-  const tempCode = "thisistestcode";
-  let targetUrl = `${defaultUrl}?code=${tempCode}`;
-
-
-  // remove after the testing is done
-  targetUrl = `https://jhl-test-functionapp.azurewebsites.net/api/testFunc?code=${azureFunctionAppKey}`;
-
+  let targetUrl = `${defaultUrl}`;
+  console.log('targetUrl', targetUrl);
   
   // prepping header
   const headers = new Headers();
@@ -47,21 +46,36 @@ async function getSummary(selectedItems=[], oss=false) {
   headers.append("Accept", "application/json");
   // prepping body
   let body = { clients, options };
+  console.log('body', body);
+
   // running fetch
-  const response = await fetch(targetUrl, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+  // creating abort controller
+  const controller = new AbortController();
+  const signal = controller.signal;
+  try {
+    const response = await fetch(targetUrl, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+      signal
+    });
+    console.log('getsummary response', response);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  
+    // maybe error check here
+    const responseJson = await response.json();
+    return responseJson;
+
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.log('Fetch request was aborted');
+    } else {
+      console.log(error);
+    }
+    return [];
   }
-
-  // maybe error check here
-  const responseJson = await response.json();
-
-
-  return responseJson;
 }
 
 export {

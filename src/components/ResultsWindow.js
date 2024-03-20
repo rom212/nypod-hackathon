@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import {
   makeStyles,
@@ -10,6 +10,7 @@ import {
   CardHeader,
   Caption1,
 } from "@fluentui/react-components";
+import * as summaryService from "../services/Summary.js";
 import sampleData from "../sample/report.json";
 
 const useStyles = makeStyles({
@@ -31,11 +32,40 @@ const useStyles = makeStyles({
   },
 });
 
-export const ResultsWindow = ({ results }) => {
-  const data = sampleData.content;
-
+const ResultsWindow = ({ results }) => {
+  console.log(results);
+  
   const styles = useStyles();
   const labelId = useId();
+
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await summaryService.getSummary([], "no");
+        console.log("response", response);
+        setData(response);
+      } catch (error) {
+        setError(error);
+      }
+    };
+
+    fetchData();
+  }, []); 
+
+  console.log(error);
+  if (error) {
+    return <div>Error</div>;
+  }
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  // const datas = data.content;
+
   return (
     <div>
       <div className={styles.resultsLabel} id={labelId}>
@@ -59,3 +89,5 @@ export const ResultsWindow = ({ results }) => {
     </div>
   );
 };
+
+export default ResultsWindow;

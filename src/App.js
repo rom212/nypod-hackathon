@@ -10,8 +10,8 @@ import {
 } from "@fluentui/react-components";
 import { Multiselect } from "./components/Multiselect";
 import { SubmitButton } from "./components/SubmitButton";
-import { ResultsWindow } from "./components/ResultsWindow";
-import * as SummaryService from "./services/Summary.js";
+import ResultsWindow from "./components/ResultsWindow";
+// import * as SummaryService from "./services/Summary.js";
 import { CUSTOMERS } from "./constants.js";
 
 const useStyles = makeStyles({
