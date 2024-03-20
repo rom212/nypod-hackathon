@@ -5,8 +5,13 @@ import {
   shorthands,
   tokens,
   Text,
-  useId
+  useId,
+  Card,
+  CardHeader,
+  Caption1,
 } from '@fluentui/react-components';
+import sampleData from '../sample/report.json';
+
 
 const useStyles = makeStyles({
   resultsLabel: {
@@ -30,6 +35,10 @@ const useStyles = makeStyles({
 
 export const ResultsWindow = ({results}) => {
   console.log('results', results);
+  const data = sampleData.content;
+  console.log('data', data);
+
+
   const styles = useStyles();
   const labelId = useId();
   return (
@@ -38,9 +47,19 @@ export const ResultsWindow = ({results}) => {
         Results
       </div>
       <div className={styles.results}>
-        <Text align="justify">
-          {/* {results} */}
-        </Text>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        {data.map((item, index) => (
+          <Card key={index} style={{ margin: '10px' }}>
+             <CardHeader
+                header={<Text weight="semibold">{item.name}</Text>}
+                description={
+                  <Caption1 className={styles.caption}>Summary</Caption1>
+                }
+              />
+            <Text>{item.report}</Text>
+          </Card>
+        ))}
+      </div>
       </div>
     </div>
   )
