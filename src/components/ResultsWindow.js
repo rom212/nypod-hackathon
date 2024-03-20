@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import {
   makeStyles,
   shorthands,
@@ -9,9 +9,8 @@ import {
   Card,
   CardHeader,
   Caption1,
-} from '@fluentui/react-components';
-import sampleData from '../sample/report.json';
-
+} from "@fluentui/react-components";
+import sampleData from "../sample/report.json";
 
 const useStyles = makeStyles({
   resultsLabel: {
@@ -26,18 +25,16 @@ const useStyles = makeStyles({
     boxShadow: tokens.shadow16,
     position: "relative",
     minWidth: "200px",
-    height: "200px",
+    height: "100%",
     ...shorthands.border("2px", "solid", tokens.colorBrandBackground),
     ...shorthands.padding("12px", "12px"),
   },
+});
 
-})
-
-export const ResultsWindow = ({results}) => {
-  console.log('results', results);
+export const ResultsWindow = ({ results }) => {
+  console.log("results", results);
   const data = sampleData.content;
-  console.log('data', data);
-
+  console.log("data", data);
 
   const styles = useStyles();
   const labelId = useId();
@@ -47,20 +44,20 @@ export const ResultsWindow = ({results}) => {
         Results
       </div>
       <div className={styles.results}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        {data.map((item, index) => (
-          <Card key={index} style={{ margin: '10px' }}>
-             <CardHeader
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          {data.map((item, index) => (
+            <Card key={index} style={{ margin: "10px" }}>
+              <CardHeader
                 header={<Text weight="semibold">{item.name}</Text>}
                 description={
                   <Caption1 className={styles.caption}>Summary</Caption1>
                 }
               />
-            <Text>{item.report}</Text>
-          </Card>
-        ))}
-      </div>
+              <Text>{item.report}</Text>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
