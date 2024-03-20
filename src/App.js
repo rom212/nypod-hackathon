@@ -11,6 +11,7 @@ import {
 } from '@fluentui/react-components';
 import { Multiselect } from './components/Multiselect';
 import { SubmitButton } from './components/SubmitButton';
+import * as SummaryService from './services/SummaryService';
 
 
 const useStyles = makeStyles({
