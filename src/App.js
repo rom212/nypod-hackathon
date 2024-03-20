@@ -11,6 +11,7 @@ import {
 } from '@fluentui/react-components';
 import { Multiselect } from './components/Multiselect';
 import { SubmitButton } from './components/SubmitButton';
+import { ResultsWindow } from './components/ResultsWindow';
 import * as SummaryService from './services/Summary.js';
 
 
@@ -48,15 +49,7 @@ function App() {
             <SubmitButton />
           </div>
           <div className={styles.rightColumn}>
-            <Text align="justify">
-              Results Placeholder Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Praesentium accusamus voluptate autem? Recusandae alias corporis dicta
-              quisquam sequi molestias deleniti, libero necessitatibus, eligendi,
-              omnis cumque enim asperiores quasi quidem sit. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit. Possimus repellat consectetur, sed
-              aperiam ex nulla repellendus tempora vero illo aliquam autem! Impedit
-              ipsa praesentium vero veritatis unde eos, fuga magnam!
-            </Text>
+            <ResultsWindow results="Results will be displayed here" />
           </div>
 
         </div>
