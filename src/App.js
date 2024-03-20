@@ -1,25 +1,23 @@
-
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import {
   makeStyles,
   FluentProvider,
   teamsLightTheme,
   Title1,
   Subtitle1,
-  Text
-} from '@fluentui/react-components';
-import { Multiselect } from './components/Multiselect';
-import { SubmitButton } from './components/SubmitButton';
-import { ResultsWindow } from './components/ResultsWindow';
-import * as SummaryService from './services/Summary.js';
+  Text,
+} from "@fluentui/react-components";
+import { Multiselect } from "./components/Multiselect";
+import { SubmitButton } from "./components/SubmitButton";
+import { ResultsWindow } from "./components/ResultsWindow";
+import * as SummaryService from "./services/Summary.js";
 
 const useStyles = makeStyles({
   root: {
     display: "flex",
     flexFlow: "row wrap",
     justifyContent: "space-between",
-
   },
   leftColumn: {
     display: "flex",
@@ -43,16 +41,22 @@ function App() {
         <div className={styles.root}>
           <div className={styles.leftColumn}>
             <Title1>NYC Pod Hackathon Project</Title1>
-            <Subtitle1>Description of what the project is/does</Subtitle1>
+            <Subtitle1>Know your customer!</Subtitle1>
             <div></div>
-            <Text>These are the instructions for how to use the application</Text>
-            <Multiselect options={["NASDAQ", "ADP", "J&J", "BNY", "YALE", "BMS"]} />
+            <Text>
+              Get fresh insights on your customer. Grounded in news and
+              financial reports, this tool allows you to find out if your
+              customer is growing their revenue, if they are ripe for
+              transformation and how they are spending their IT budget.
+            </Text>
+            <Multiselect
+              options={["NASDAQ", "ADP", "J&J", "BNY", "YALE", "BMS"]}
+            />
             <SubmitButton />
           </div>
           <div className={styles.rightColumn}>
             <ResultsWindow results={results} />
           </div>
-
         </div>
       </div>
     </FluentProvider>
