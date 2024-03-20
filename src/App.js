@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
+import logo from "./logo.svg";
+import "./App.css";
+import React from "react";
 import { Switch } from "@fluentui/react-components";
 import type { SwitchProps } from "@fluentui/react-components";
 
@@ -13,13 +13,11 @@ function App() {
     [setChecked]
   );
 
-
-
   return (
     <div className="App">
-        <h2>super awesome app</h2>
+      <h2>Customer Report</h2>
       <div className="main-box">
-        <div className='inner-box' >
+        <div className="inner-box">
           <h3>form</h3>
           <Switch
             checked={checked}
@@ -27,9 +25,7 @@ function App() {
             label={checked ? "Checked" : "Unchecked"}
           />
         </div>
-        <div className='inner-box' >
-          output
-        </div>
+        <div className="inner-box">output</div>
       </div>
     </div>
   );
