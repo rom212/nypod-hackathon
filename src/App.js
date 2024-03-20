@@ -22,6 +22,7 @@ const useStyles = makeStyles({
   },
   leftColumn: {
     display: "flex",
+    rowGap: "15px",
     flexDirection: "column",
     width: "50%",
   },
