@@ -1,23 +1,36 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Switch } from "@fluentui/react-components";
+import type { SwitchProps } from "@fluentui/react-components";
 
 function App() {
+  const [checked, setChecked] = React.useState(true);
+  const onChange = React.useCallback(
+    (ev) => {
+      setChecked(ev.currentTarget.checked);
+    },
+    [setChecked]
+  );
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h2>super awesome app</h2>
+      <div className="main-box">
+        <div className='inner-box' >
+          <h3>form</h3>
+          <Switch
+            checked={checked}
+            onChange={onChange}
+            label={checked ? "Checked" : "Unchecked"}
+          />
+        </div>
+        <div className='inner-box' >
+          output
+        </div>
+      </div>
     </div>
   );
 }

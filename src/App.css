@@ -32,3 +32,13 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+
+.main-box {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.inner-box {
+  flex: 0 0 45%;
+  border: 1px solid black;
+}
