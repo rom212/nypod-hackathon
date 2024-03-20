@@ -28,7 +28,8 @@ const useStyles = makeStyles({
 
 })
 
-export const ResultsWindow = (props) => {
+export const ResultsWindow = ({results}) => {
+  console.log('results', results);
   const styles = useStyles();
   const labelId = useId();
   return (
@@ -38,7 +39,7 @@ export const ResultsWindow = (props) => {
       </div>
       <div className={styles.results}>
         <Text align="justify">
-          {props.results}
+          {/* {results} */}
         </Text>
       </div>
     </div>
