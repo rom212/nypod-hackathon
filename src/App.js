@@ -35,6 +35,11 @@ const useStyles = makeStyles({
 
 function App() {
   const [results, setResults] = React.useState({});
+  const [selectedOptions, setSelectedOptions] = React.useState([]);
+  
+  const handleDropdownSelect = (selectedOptions) => {
+    setSelectedOptions(selectedOptions);
+  };
 
   const styles = useStyles();
   return (
@@ -51,8 +56,8 @@ function App() {
               customer is growing their revenue, if they are ripe for
               transformation and how they are spending their IT budget.
             </Text>
-            <Multiselect options={CUSTOMERS} />
-            <SubmitButton />
+            <Multiselect options={CUSTOMERS} onOptionSelect={handleDropdownSelect} />
+            <SubmitButton selectedOptions={selectedOptions}/>
           </div>
           <div className={styles.rightColumn}>
             <ResultsWindow results={results} />

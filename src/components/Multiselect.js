@@ -18,10 +18,15 @@ const useStyles = makeStyles({
   },
 });
 
-export const Multiselect = (props) => {
+export const Multiselect = ({ options, onOptionSelect }) => {
   const comboId = useId("combo-multi");
-  const options = props.options;
+  //const options = props.options;
   const styles = useStyles();
+
+  const handleDropdownSelect = (event, data) => {
+    onOptionSelect(data.selectedOptions);
+  };
+
   return (
     <div className={styles.root}>
       <label id={comboId}>Select ticker symbol(s)</label>
@@ -29,7 +34,7 @@ export const Multiselect = (props) => {
         aria-labelledby={comboId}
         multiselect={true}
         placeholder="Select"
-        {...props}
+        onOptionSelect={handleDropdownSelect}
       >
         {options.map((option) => (
           <Option key={option}>

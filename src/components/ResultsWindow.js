@@ -32,9 +32,7 @@ const useStyles = makeStyles({
 });
 
 export const ResultsWindow = ({ results }) => {
-  console.log("results", results);
   const data = sampleData.content;
-  console.log("data", data);
 
   const styles = useStyles();
   const labelId = useId();
