@@ -14,7 +14,6 @@ import { SubmitButton } from './components/SubmitButton';
 import { ResultsWindow } from './components/ResultsWindow';
 import * as SummaryService from './services/Summary.js';
 
-
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -35,6 +34,8 @@ const useStyles = makeStyles({
 });
 
 function App() {
+  const [results, setResults] = React.useState({});
+
   const styles = useStyles();
   return (
     <FluentProvider theme={teamsLightTheme}>
@@ -49,7 +50,7 @@ function App() {
             <SubmitButton />
           </div>
           <div className={styles.rightColumn}>
-            <ResultsWindow results="Results will be displayed here" />
+            <ResultsWindow results={results} />
           </div>
 
         </div>
