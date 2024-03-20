@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 function App() {
   const [results, setResults] = React.useState({});
   const [selectedOptions, setSelectedOptions] = React.useState([]);
-  
+
   const handleDropdownSelect = (selectedOptions) => {
     setSelectedOptions(selectedOptions);
   };
@@ -51,13 +51,16 @@ function App() {
             <Subtitle1>Know your customer!</Subtitle1>
             <div></div>
             <Text>
-              Get fresh insights on your customer. Grounded in news and
-              financial reports, this tool allows you to find out if your
-              customer is growing their revenue, if they are ripe for
-              transformation and how they are spending their IT budget.
+              Grounded in news and financial reports, this AI-driven account
+              analysis tool provides fresh insights on your customer, including
+              their revenue growth, readiness for transformation, and IT budget
+              spending patterns
             </Text>
-            <Multiselect options={CUSTOMERS} onOptionSelect={handleDropdownSelect} />
-            <SubmitButton selectedOptions={selectedOptions}/>
+            <Multiselect
+              options={CUSTOMERS}
+              onOptionSelect={handleDropdownSelect}
+            />
+            <SubmitButton selectedOptions={selectedOptions} />
           </div>
           <div className={styles.rightColumn}>
             <ResultsWindow results={results} />
