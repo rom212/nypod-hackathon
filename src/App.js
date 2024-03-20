@@ -12,6 +12,7 @@ import { Multiselect } from "./components/Multiselect";
 import { SubmitButton } from "./components/SubmitButton";
 import { ResultsWindow } from "./components/ResultsWindow";
 import * as SummaryService from "./services/Summary.js";
+import { CUSTOMERS } from "./constants.js";
 
 const useStyles = makeStyles({
   root: {
@@ -49,9 +50,7 @@ function App() {
               customer is growing their revenue, if they are ripe for
               transformation and how they are spending their IT budget.
             </Text>
-            <Multiselect
-              options={["NASDAQ", "ADP", "J&J", "BNY", "YALE", "BMS"]}
-            />
+            <Multiselect options={CUSTOMERS} />
             <SubmitButton />
           </div>
           <div className={styles.rightColumn}>
