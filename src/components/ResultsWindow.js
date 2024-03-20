@@ -10,8 +10,6 @@ import {
   CardHeader,
   Caption1,
 } from "@fluentui/react-components";
-import * as summaryService from "../services/Summary.js";
-import sampleData from "../sample/report.json";
 
 const useStyles = makeStyles({
   resultsLabel: {
@@ -33,38 +31,23 @@ const useStyles = makeStyles({
 });
 
 const ResultsWindow = ({ results }) => {
-  console.log(results);
+  console.log("results", results);
   
   const styles = useStyles();
   const labelId = useId();
-
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await summaryService.getSummary([], "no");
-        console.log("response", response);
-        setData(response);
-      } catch (error) {
-        setError(error);
-      }
-    };
-
-    fetchData();
-  }, []); 
-
-  console.log(error);
-  if (error) {
-    return <div>Error</div>;
+ 
+  if (results.length === 0) {
+    return (
+      <div>
+        <div className={styles.resultsLabel} id={labelId}>
+          Results
+        </div>
+        <div className={styles.results}>
+          <div style={{height: "100%", textAlign: "center"}}>Waiting on selection</div>
+        </div>
+      </div>
+    );
   }
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
-  // const datas = data.content;
 
   return (
     <div>
@@ -73,7 +56,7 @@ const ResultsWindow = ({ results }) => {
       </div>
       <div className={styles.results}>
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          {data.map((item, index) => (
+          {results.map((item, index) => (
             <Card key={index} style={{ margin: "10px" }}>
               <CardHeader
                 header={<Text weight="semibold">{item.name}</Text>}
@@ -81,7 +64,11 @@ const ResultsWindow = ({ results }) => {
                   <Caption1 className={styles.caption}>Summary</Caption1>
                 }
               />
-              <Text>{item.report}</Text>
+              <Text>
+                <div style={{ whiteSpace: 'pre-wrap' }}>
+                  {item.report}
+                </div>
+              </Text>
             </Card>
           ))}
         </div>
