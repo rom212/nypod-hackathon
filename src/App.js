@@ -15,29 +15,81 @@ import { CUSTOMERS } from "./constants.js";
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    width: 'auto',
+    height: 'auto',
+    boxSizing: 'border-box',
+    '> *': {
+      textOverflow: 'ellipsis',
+    },
+    '> :not(:first-child)': {
+      marginTop: '0px',
+    },
+    '> *:not(.ms-StackItem)': {
+      flexShrink: 1,
+    },
   },
-  leftColumn: {
-    display: "flex",
-    rowGap: "15px",
-    flexDirection: "column",
-    width: "50%",
-  },
-  rightColumn: {
-    display: "flex",
-    flexDirection: "column",
-    width: "50%",
-  },
-  title: {
-    backgroundImage: "linear-gradient(to right, #0F6CBD, white)",
-    color: "white",
+  header: {
     height: "3rem",
+    backgroundImage: "linear-gradient(to right, #0F6CBD, white)",
+    width: 'auto',
+    flexShrink: 1,
+    color: "white",
+  },
+
+  content: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: 'auto',
+    height: 'auto',
+    boxSizing: 'border-box',
+    '> *': {
+      textOverflow: 'ellipsis',
+    },
+    '> :not(:first-child)': {
+      marginTop: '0px',
+    },
+    '> *:not(.ms-StackItem)': {
+      flexShrink: 1,
+    },
+  },
+
+  mainContent: {
+    height: 'auto',
+    width: '500px',
+    flexShrink: 1,
+  },
+
+  controls: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    columnGap: '5px',
+    alignItems: 'flex-end',
+  },
+
+  multiselect: {
+    display: 'flex',
+    flexShrink: 1,
+  },
+
+  submitButton: {
+    display: 'flex',
+    flexShrink: 1,
+  },
+
+  resultsContent: {
+    height: 'auto',
+    width: 'auto',
+    flexShrink: 1,
   },
   subTitle: {
     color: "#AB8F63",
     fontWeight: "bold",
-  },
+  }
 });
 
 function App() {
@@ -53,8 +105,11 @@ function App() {
     <FluentProvider theme={webLightTheme}>
       <div className="App">
         <div className={styles.root}>
-          <div className={styles.leftColumn}>
+          <div className={styles.header}>
             <Title1 className={styles.title}>NYC Pod Hackathon Project</Title1>
+          </div>
+          <div className={styles.content}>
+          <div className={styles.mainContent}>
             <Subtitle1 className={styles.subTitle}>
               Know your customer!
             </Subtitle1>
@@ -65,17 +120,24 @@ function App() {
               their revenue growth, readiness for transformation, and IT budget
               spending patterns
             </Text>
+            <div className={styles.controls}>
+            <div className={styles.multiselect}>
             <Multiselect
               options={CUSTOMERS}
               onOptionSelect={handleDropdownSelect}
             />
+            </div>
+            <div className={styles.submitButton}>
             <SubmitButton
               selectedOptions={selectedOptions}
               setResults={setResults}
             />
+            </div>
+            </div>
           </div>
-          <div className={styles.rightColumn}>
+          <div className={styles.resultsContent}>
             <ResultsWindow results={results} />
+          </div>
           </div>
         </div>
       </div>
