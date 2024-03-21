@@ -22,12 +22,13 @@ async function getTest() {
 }
 
 
-async function getSummary(selectedItems=[], oss="no") {
+async function getSummary(selectedItems, oss="no") {
   //may need to do clearn up on the and others
-  const clients = [...selectedItems];
+  const clients = selectedItems;
+  console.log(selectedItems)
   
   // this is for testing
-  clients.push("ADP");
+  //clients.push("ADP");
   // clients.push("Yale");
   // clients.push("J&J");
   // this is for testing

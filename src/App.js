@@ -3,21 +3,19 @@ import ReactDOM from "react-dom";
 import {
   makeStyles,
   FluentProvider,
-  teamsLightTheme,
+  webLightTheme,
   Title1,
   Subtitle1,
-  Text,
+  Text
 } from "@fluentui/react-components";
 import { Multiselect } from "./components/Multiselect";
 import { SubmitButton } from "./components/SubmitButton";
-import ResultsWindow from "./components/ResultsWindow";
-// import * as SummaryService from "./services/Summary.js";
+import { ResultsWindow } from "./components/ResultsWindow";
 import { CUSTOMERS } from "./constants.js";
 
 const useStyles = makeStyles({
   root: {
     display: "flex",
-    flexFlow: "row wrap",
     justifyContent: "space-between",
   },
   leftColumn: {
@@ -34,7 +32,7 @@ const useStyles = makeStyles({
 });
 
 function App() {
-  const [results, setResults] = React.useState({});
+  const [results, setResults] = React.useState([]);
   const [selectedOptions, setSelectedOptions] = React.useState([]);
 
   const handleDropdownSelect = (selectedOptions) => {
@@ -43,29 +41,31 @@ function App() {
 
   const styles = useStyles();
   return (
-    <FluentProvider theme={teamsLightTheme}>
+    <FluentProvider theme={webLightTheme}>
       <div className="App">
         <div className={styles.root}>
           <div className={styles.leftColumn}>
             <Title1>NYC Pod Hackathon Project</Title1>
-            <Subtitle1>Know your customer!</Subtitle1>
-            <div></div>
-            <Text>
-              Grounded in news and financial reports, this AI-driven account
-              analysis tool provides fresh insights on your customer, including
-              their revenue growth, readiness for transformation, and IT budget
-              spending patterns
-            </Text>
-            <Multiselect
-              options={CUSTOMERS}
-              onOptionSelect={handleDropdownSelect}
-            />
-            <SubmitButton selectedOptions={selectedOptions} />
+              <Subtitle1>Know your customer!</Subtitle1>
+              <div></div>
+              <Text>
+                Grounded in news and financial reports, this AI-driven account
+                analysis tool provides fresh insights on your customer, including
+                their revenue growth, readiness for transformation, and IT budget
+                spending patterns
+              </Text>
+              <Multiselect
+                options={CUSTOMERS}
+                onOptionSelect={handleDropdownSelect}
+              />
+              <SubmitButton
+                selectedOptions={selectedOptions}
+                setResults={setResults} />
+            </div>
+            <div className={styles.rightColumn}>
+              <ResultsWindow results={results} />
+            </div>
           </div>
-          <div className={styles.rightColumn}>
-            <ResultsWindow results={results} />
-          </div>
-        </div>
       </div>
     </FluentProvider>
   );

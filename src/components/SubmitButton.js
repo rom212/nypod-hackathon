@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import {
   buttonClassNames,
   makeStyles,
@@ -8,6 +8,7 @@ import {
   Spinner,
 } from "@fluentui/react-components";
 import { CheckmarkFilled } from "@fluentui/react-icons";
+import * as summaryService from "../services/Summary.js";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -27,34 +28,44 @@ const useStyles = makeStyles({
     pointerEvents: "none",
 
     [`& .${buttonClassNames.icon}`]: {
-      color: tokens.colorStatusSuccessForeground1,
+      color: tokens.colorNeutralStroke1,
     },
   },
 });
 
-export const SubmitButton = () => {
+export const SubmitButton = ({ selectedOptions, setResults }) => {
   const styles = useStyles();
 
   const [loadingState, setLoadingState] = React.useState("initial");
+  const [error, setError] = useState(null);
 
-  //   const [setTimeout, cancelTimeout] = useTimeout();
+  useEffect(() => {
+    setLoadingState("initial");
+  }, [selectedOptions]);
 
-  const onButtonClick = () => {
+  const onButtonClick = async () => {
     setLoadingState("loading");
-    // setTimeout(() => setLoadingState("loaded"), 5000);
+    try {
+      const response = await summaryService.getSummary(selectedOptions, "no");
+      setResults(response);
+      setLoadingState("done");
+    } catch (error) {
+      setError(error);
+      setLoadingState("error");
+    }
   };
 
   const buttonContent =
     loadingState === "loading"
       ? "Loading"
-      : loadingState === "loaded"
-      ? "Loaded"
-      : "Submit";
+      : loadingState === "done"
+        ? "Done"
+        : "Submit";
 
   const buttonIcon =
     loadingState === "loading" ? (
-      <Spinner size="tiny" />
-    ) : loadingState === "loaded" ? (
+      <Spinner size="extra-small" />
+    ) : loadingState === "done" ? (
       <CheckmarkFilled />
     ) : null;
 
@@ -63,15 +74,14 @@ export const SubmitButton = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Button
-        appearance="primary"
-        className={buttonClassName}
-        disabledFocusable={loadingState !== "initial"}
-        icon={buttonIcon}
-        onClick={onButtonClick}
-      >
-        {buttonContent}
-      </Button>
+    <Button
+      appearance="primary"
+      className={buttonClassName}
+      icon={buttonIcon}
+      onClick={onButtonClick}
+    >
+      {buttonContent}
+    </Button>
     </div>
   );
 };

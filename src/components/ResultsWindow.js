@@ -30,8 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ResultsWindow = ({ results }) => {
-  console.log("results", results);
+export const ResultsWindow = ({ results }) => {
   
   const styles = useStyles();
   const labelId = useId();
@@ -76,5 +75,3 @@ const ResultsWindow = ({ results }) => {
     </div>
   );
 };
-
-export default ResultsWindow;
