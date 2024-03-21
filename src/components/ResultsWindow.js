@@ -11,7 +11,6 @@ import {
   Caption1,
   Spinner,
 } from "@fluentui/react-components";
-import type { SpinnerProps } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
   resultsLabel: {
@@ -36,8 +35,6 @@ export const ResultsWindow = ({ results }) => {
   
   const styles = useStyles();
   const labelId = useId();
-  
-  console.log('ResultsWindow - results', results);
 
   if (results === null) {
     return (
@@ -60,7 +57,7 @@ export const ResultsWindow = ({ results }) => {
         </div>
         <div className={styles.results}>
           <div style={{height: "100%", textAlign: "center"}}>
-            <Spinner appearance="primary" label="Loading..." />
+            <Spinner size="huge" />
           </div>
         </div>
       </div>

@@ -25,29 +25,19 @@ async function getTest() {
 async function getSummary(selectedItems, oss="no") {
   //may need to do clearn up on the and others
   const clients = selectedItems;
-  console.log(selectedItems)
-  
-  // this is for testing
-  //clients.push("ADP");
-  // clients.push("Yale");
-  // clients.push("J&J");
-  // this is for testing
-
   const options = [
     {oss: oss === "yes" ? true : false}
   ];
 
   // prepping url
   let targetUrl = `${defaultUrl}`;
-  console.log('targetUrl', targetUrl);
-  
+
   // prepping header
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
   headers.append("Accept", "application/json");
   // prepping body
   let body = { clients, options };
-  console.log('body', body);
 
   // running fetch
   // creating abort controller
@@ -60,7 +50,6 @@ async function getSummary(selectedItems, oss="no") {
       body: JSON.stringify(body),
       signal
     });
-    console.log('getsummary response', response);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
