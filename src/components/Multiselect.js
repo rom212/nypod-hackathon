@@ -1,34 +1,20 @@
 import * as React from "react";
 import {
   Dropdown,
-  makeStyles,
   Option,
-  shorthands,
   useId,
 } from "@fluentui/react-components";
-
-const useStyles = makeStyles({
-  root: {
-    // Stack the label above the field with a gap
-    display: "grid",
-    gridTemplateRows: "repeat(1fr)",
-    justifyItems: "start",
-    ...shorthands.gap("2px"),
-    maxWidth: "400px",
-  },
-});
+import '../stylesheets/Multiselect.css';
 
 export const Multiselect = ({ options, onOptionSelect }) => {
   const comboId = useId("combo-multi");
-  //const options = props.options;
-  const styles = useStyles();
 
   const handleDropdownSelect = (event, data) => {
     onOptionSelect(data.selectedOptions);
   };
 
   return (
-    <div className={styles.root}>
+    <div className="multiselect">
       <label id={comboId}>Select ticker symbol(s)</label>
       <Dropdown
         aria-labelledby={comboId}

@@ -1,0 +1,28 @@
+.resultsWindow {
+    display: flex;
+    flex-direction: column;
+    height: 400px
+}
+
+.resultsLabel {
+    color: white;
+    background-color: #0F6CBD;
+    width: fit-content;
+    padding: 2px 12px;
+    font-weight: bold;
+
+}
+
+.resultsBox {
+    border: 2px solid #0F6CBD;
+    background-color: rgba(171, 143, 99, .2);
+    padding: 12px 12px;
+    flex-grow: 1;
+    overflow-y: scroll;
+    max-height: 80vh
+
+}
+
+.card {
+    margin: 10px;
+}

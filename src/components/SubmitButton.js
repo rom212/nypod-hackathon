@@ -1,43 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {
-  buttonClassNames,
-  makeStyles,
-  shorthands,
-  tokens,
-  Button,
-  Spinner,
-} from "@fluentui/react-components";
+import React, { useEffect } from "react";
+import { Button } from "@fluentui/react-components";
 import { CheckmarkFilled } from "@fluentui/react-icons";
 import * as summaryService from "../services/Summary.js";
-
-const useStyles = makeStyles({
-  wrapper: {
-    columnGap: "15px",
-    display: "flex",
-    alignSelf: "center",
-  },
-  buttonNonInteractive: {
-    backgroundColor: tokens.colorNeutralBackground1,
-    ...shorthands.border(
-      tokens.strokeWidthThin,
-      "solid",
-      tokens.colorNeutralStroke1
-    ),
-    color: tokens.colorNeutralForeground1,
-    cursor: "default",
-    pointerEvents: "none",
-
-    [`& .${buttonClassNames.icon}`]: {
-      color: tokens.colorNeutralStroke1,
-    },
-  },
-});
+import '../stylesheets/SubmitButton.css';
 
 export const SubmitButton = ({ selectedOptions, setResults }) => {
-  const styles = useStyles();
-
   const [loadingState, setLoadingState] = React.useState("initial");
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLoadingState("initial");
@@ -51,8 +19,7 @@ export const SubmitButton = ({ selectedOptions, setResults }) => {
       setResults(response);
       setLoadingState("done");
     } catch (error) {
-      setError(error);
-      setLoadingState("error");
+      console.log(error)
     }
   };
 
@@ -71,10 +38,10 @@ export const SubmitButton = ({ selectedOptions, setResults }) => {
     ) : null;
 
   const buttonClassName =
-    loadingState === "initial" ? undefined : styles.buttonNonInteractive;
+    loadingState === "initial" ? "submitButton" : "submitButtonNonInteractive";
 
   return (
-    <div className={styles.wrapper}>
+    <div className="submitButtonWrapper">
     <Button
       appearance="primary"
       className={buttonClassName}

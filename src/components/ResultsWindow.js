@@ -1,105 +1,41 @@
 import {
-  makeStyles,
-  shorthands,
-  tokens,
-  Text,
-  useId,
-  Card,
-  CardHeader,
-  Caption1,
-  Spinner,
-} from "@fluentui/react-components";
+    Text,
+    Card,
+    CardHeader,
+    Caption1,
+    Spinner,
+  } from "@fluentui/react-components";
+import '../stylesheets/ResultsWindow.css';
 
-const useStyles = makeStyles({
-  resultsLabel: {
-    color: tokens.colorNeutralForegroundOnBrand,
-    backgroundColor: tokens.colorBrandBackground,
-    width: "fit-content",
-    fontWeight: tokens.fontWeightBold,
-    ...shorthands.padding("2px", "12px"),
-  },
-  results: {
-    overflowY: "auto",
-    boxShadow: tokens.shadow16,
-    position: "relative",
-    width: "auto",
-    minHeight: "40px",
-    height: "100%",
-    backgroundColor: "rgba(171, 143, 99, .2)",
-    ...shorthands.border("2px", "solid", tokens.colorBrandBackground),
-    ...shorthands.padding("12px", "12px"),
-  },
-});
+const renderResults = (results) => {
+    if (results === null) {
+      return <div>Waiting on selection</div>;
+    }
+  
+    if (typeof results === "boolean") {
+      return <Spinner appearance="primary" label="Loading..." />;
+    }
+  
+    if (Array.isArray(results) && results.length !== 0) {
+      return results.map((item, index) => (
+        <Card key={index} className="card">
+          <CardHeader
+            header={<Text weight="semibold">{item.name}</Text>}
+            description={<Caption1>Summary</Caption1>}
+          />
+          <Text>
+            <div>{item.report}</div>
+          </Text>
+        </Card>
+      ));
+    }
+  
+    return <div>No results</div>;
+  };
 
-export const ResultsWindow = ({ results }) => {
-  const styles = useStyles();
-  const labelId = useId();
-
-  if (results === null) {
-    return (
-      <div>
-        <div className={styles.resultsLabel} id={labelId}>
-          Results
-        </div>
-        <div className={styles.results}>
-          <div>Waiting on selection</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (typeof results === "boolean") {
-    return (
-      <div>
-        <div className={styles.resultsLabel} id={labelId}>
-          Results
-        </div>
-        <div className={styles.results}>
-            <Spinner appearance="primary" label="Loading..." />
-        </div>
-      </div>
-    );
-  }
-
-  if (Array.isArray(results) && results.length !== 0) {
-    return (
-      <div>
-        <div className={styles.resultsLabel} id={labelId}>
-          Results
-        </div>
-        <div className={styles.results}>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-          >
-            {results.map((item, index) => (
-              <Card key={index} style={{ margin: "10px" }}>
-                <CardHeader
-                  header={<Text weight="semibold">{item.name}</Text>}
-                  description={
-                    <Caption1 className={styles.caption}>Summary</Caption1>
-                  }
-                />
-                <Text>
-                  <div style={{ whiteSpace: "pre-wrap", fontSize: "1.25rem" }}>
-                    {item.report}
-                  </div>
-                </Text>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <div className={styles.resultsLabel} id={labelId}>
-        Results
-      </div>
-      <div className={styles.results}>
-        <div style={{ height: "100%", textAlign: "center" }}>No results</div>
-      </div>
+  export const ResultsWindow = ({ results }) => (
+    <div div className="resultsWindow">
+      <div className="resultsLabel">Results</div>
+      <div className="resultsBox">{renderResults(results)}</div>
     </div>
   );
-};

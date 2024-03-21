@@ -1,0 +1,7 @@
+.multiselect {
+    display: grid;
+    grid-template-rows: repeat(1fr);
+    justify-items: start;
+    gap: 2px;
+    max-width: 400px;
+  }

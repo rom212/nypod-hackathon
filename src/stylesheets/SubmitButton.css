@@ -1,0 +1,28 @@
+.submitButtonWrapper {
+    column-gap: 15px;
+    display: flex;
+    align-self: center;
+  }
+  
+  .submitButton {
+    background-color: #0F6CBD;
+    color: #FFFFFF;
+    border: 2px solid #0F6CBD;
+  }
+  
+  .submitButtonNonInteractive {
+    background-color: #F3F2F1;
+    border: 1px solid #605E5C;
+    color: #605E5C;
+    cursor: default;
+    pointer-events: none;
+  }
+  
+  .submitButtonNonInteractive .icon {
+    color: #605E5C;
+  }
+  
+  .submitButton:hover {
+    background-color: #FFFFFF;
+    color: #0F6CBD;
+  }
