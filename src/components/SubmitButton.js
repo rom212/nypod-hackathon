@@ -45,6 +45,7 @@ export const SubmitButton = ({ selectedOptions, setResults }) => {
 
   const onButtonClick = async () => {
     setLoadingState("loading");
+    setResults(false)
     try {
       const response = await summaryService.getSummary(selectedOptions, "no");
       setResults(response);
