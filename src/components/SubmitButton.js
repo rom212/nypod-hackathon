@@ -65,7 +65,7 @@ export const SubmitButton = ({ selectedOptions, setResults }) => {
 
   const buttonIcon =
     loadingState === "loading" ? (
-      <Spinner size="extra-small" />
+      null
     ) : loadingState === "done" ? (
       <CheckmarkFilled />
     ) : null;

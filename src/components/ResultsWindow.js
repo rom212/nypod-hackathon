@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from "react-dom";
 import {
   makeStyles,
   shorthands,
@@ -24,7 +22,8 @@ const useStyles = makeStyles({
     overflowY: "auto",
     boxShadow: tokens.shadow16,
     position: "relative",
-    minWidth: "200px",
+    width: "auto",
+    minHeight: "40px",
     height: "100%",
     ...shorthands.border("2px", "solid", tokens.colorBrandBackground),
     ...shorthands.padding("12px", "12px"),
@@ -43,7 +42,7 @@ export const ResultsWindow = ({ results }) => {
           Results
         </div>
         <div className={styles.results}>
-          <div style={{height: "100%", textAlign: "center"}}>Waiting on selection</div>
+          <div>Waiting on selection</div>
         </div>
       </div>
     );
@@ -57,7 +56,7 @@ export const ResultsWindow = ({ results }) => {
         </div>
         <div className={styles.results}>
           <div style={{height: "100%", textAlign: "center"}}>
-            <Spinner size="huge" />
+            <Spinner appearance="primary" label="Loading..." />
           </div>
         </div>
       </div>

@@ -6,7 +6,8 @@ import {
   webLightTheme,
   Title1,
   Subtitle1,
-  Text
+  Text,
+  tokens,
 } from "@fluentui/react-components";
 import { Multiselect } from "./components/Multiselect";
 import { SubmitButton } from "./components/SubmitButton";
@@ -15,20 +16,91 @@ import { CUSTOMERS } from "./constants.js";
 
 const useStyles = makeStyles({
   root: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    width: 'auto',
+    height: 'auto',
+    boxSizing: 'border-box',
+    '> *': {
+      textOverflow: 'ellipsis',
+    },
+    '> :not(:first-child)': {
+      marginTop: '0px',
+    },
+    '> *:not(.ms-StackItem)': {
+      flexShrink: 1,
+    },
+    rowGap: '5px'
   },
-  leftColumn: {
-    display: "flex",
-    rowGap: "15px",
-    flexDirection: "column",
-    width: "50%",
+  header: {
+    height: "3rem",
+    backgroundImage: "linear-gradient(to right, #0F6CBD, white)",
+    width: 'auto',
+    flexShrink: 1,
+    color: "white",
   },
-  rightColumn: {
-    display: "flex",
-    flexDirection: "column",
-    width: "50%",
+
+  content: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: 'auto',
+    height: 'auto',
+    rowGap: '5px',
+    boxSizing: 'border-box',
+    '> *': {
+      textOverflow: 'ellipsis',
+    },
+    '> :not(:first-child)': {
+      marginTop: '0px',
+    },
+    '> *:not(.ms-StackItem)': {
+      flexShrink: 1,
+    },
   },
+
+  mainContent: {
+    height: 'auto',
+    width: '500px',
+    flexShrink: 1,
+    '@media (max-width: 800px)': {
+      width: '100%'
+    },
+  },
+
+  controls: {
+    marginTop: '10px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    columnGap: '5px',
+    alignItems: 'flex-end',
+  },
+
+  multiselect: {
+    display: 'flex',
+    flexShrink: 1,
+  },
+
+  submitButton: {
+    display: 'flex',
+    flexShrink: 1,
+  },
+
+  resultsContent: {
+    height: 'auto',
+    width: 'auto',
+    flexGrow: 1,
+    maxWidth: '700px',
+    '@media (max-width: 800px)': {
+      width: '100%',
+    },
+  },
+  subTitle: {
+    color: tokens.colorBrandForeground1,
+    fontWeight: "bold",
+  }
 });
 
 function App() {
@@ -44,28 +116,41 @@ function App() {
     <FluentProvider theme={webLightTheme}>
       <div className="App">
         <div className={styles.root}>
-          <div className={styles.leftColumn}>
-            <Title1>NYC Pod Hackathon Project</Title1>
-              <Subtitle1>Know your customer!</Subtitle1>
-              <div></div>
-              <Text>
-                Grounded in news and financial reports, this AI-driven account
-                analysis tool provides fresh insights on your customer, including
-                their revenue growth, readiness for transformation, and IT budget
-                spending patterns
-              </Text>
-              <Multiselect
-                options={CUSTOMERS}
-                onOptionSelect={handleDropdownSelect}
-              />
-              <SubmitButton
-                selectedOptions={selectedOptions}
-                setResults={setResults} />
+          <div className={styles.header}>
+            <Title1 className={styles.title}>NYC Pod Hackathon Project</Title1>
+          </div>
+          <div className={styles.content}>
+          <div className={styles.mainContent}>
+            <Subtitle1 className={styles.subTitle}>
+              Know your customer!
+            </Subtitle1>
+            <div></div>
+            <Text>
+              Grounded in news and financial reports, this AI-driven account
+              analysis tool provides fresh insights on your customer, including
+              their revenue growth, readiness for transformation, and IT budget
+              spending patterns
+            </Text>
+            <div className={styles.controls}>
+            <div className={styles.multiselect}>
+            <Multiselect
+              options={CUSTOMERS}
+              onOptionSelect={handleDropdownSelect}
+            />
             </div>
-            <div className={styles.rightColumn}>
-              <ResultsWindow results={results} />
+            <div className={styles.submitButton}>
+            <SubmitButton
+              selectedOptions={selectedOptions}
+              setResults={setResults}
+            />
+            </div>
             </div>
           </div>
+          <div className={styles.resultsContent}>
+            <ResultsWindow results={results} />
+          </div>
+          </div>
+        </div>
       </div>
     </FluentProvider>
   );
