@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from "react-dom";
 import {
   makeStyles,
   shorthands,
@@ -11,7 +9,6 @@ import {
   Caption1,
   Spinner,
 } from "@fluentui/react-components";
-import type { SpinnerProps } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
   resultsLabel: {
@@ -25,7 +22,8 @@ const useStyles = makeStyles({
     overflowY: "auto",
     boxShadow: tokens.shadow16,
     position: "relative",
-    minWidth: "200px",
+    width: "auto",
+    minHeight: "40px",
     height: "100%",
     ...shorthands.border("2px", "solid", tokens.colorBrandBackground),
     ...shorthands.padding("12px", "12px"),
@@ -46,7 +44,7 @@ export const ResultsWindow = ({ results }) => {
           Results
         </div>
         <div className={styles.results}>
-          <div style={{height: "100%", textAlign: "center"}}>Waiting on selection</div>
+          <div>Waiting on selection</div>
         </div>
       </div>
     );
@@ -59,9 +57,7 @@ export const ResultsWindow = ({ results }) => {
           Results
         </div>
         <div className={styles.results}>
-          <div style={{height: "100%", textAlign: "center"}}>
-            <Spinner appearance="primary" label="Loading..." />
-          </div>
+            <Spinner appearance="primary" size="extra-small" label="Loading..." />
         </div>
       </div>
     );

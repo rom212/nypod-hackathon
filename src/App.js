@@ -7,6 +7,7 @@ import {
   Title1,
   Subtitle1,
   Text,
+  tokens,
 } from "@fluentui/react-components";
 import { Multiselect } from "./components/Multiselect";
 import { SubmitButton } from "./components/SubmitButton";
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
     '> *:not(.ms-StackItem)': {
       flexShrink: 1,
     },
+    rowGap: '5px'
   },
   header: {
     height: "3rem",
@@ -45,6 +47,7 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
     width: 'auto',
     height: 'auto',
+    rowGap: '5px',
     boxSizing: 'border-box',
     '> *': {
       textOverflow: 'ellipsis',
@@ -61,9 +64,13 @@ const useStyles = makeStyles({
     height: 'auto',
     width: '500px',
     flexShrink: 1,
+    '@media (max-width: 800px)': {
+      width: '100%'
+    },
   },
 
   controls: {
+    marginTop: '10px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -84,10 +91,14 @@ const useStyles = makeStyles({
   resultsContent: {
     height: 'auto',
     width: 'auto',
-    flexShrink: 1,
+    flexGrow: 1,
+    maxWidth: '700px',
+    '@media (max-width: 800px)': {
+      width: '100%',
+    },
   },
   subTitle: {
-    color: "#AB8F63",
+    color: tokens.colorBrandForeground1,
     fontWeight: "bold",
   }
 });
