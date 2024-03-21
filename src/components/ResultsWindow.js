@@ -25,13 +25,13 @@ const useStyles = makeStyles({
     width: "auto",
     minHeight: "40px",
     height: "100%",
+    backgroundColor: "rgba(171, 143, 99, .2)",
     ...shorthands.border("2px", "solid", tokens.colorBrandBackground),
     ...shorthands.padding("12px", "12px"),
   },
 });
 
 export const ResultsWindow = ({ results }) => {
-  
   const styles = useStyles();
   const labelId = useId();
 
@@ -55,14 +55,13 @@ export const ResultsWindow = ({ results }) => {
           Results
         </div>
         <div className={styles.results}>
-          <div style={{height: "100%", textAlign: "center"}}>
+          <div style={{ height: "100%", textAlign: "center" }}>
             <Spinner appearance="primary" label="Loading..." />
           </div>
         </div>
       </div>
     );
   }
-
 
   if (Array.isArray(results) && results.length !== 0) {
     return (
@@ -71,7 +70,9 @@ export const ResultsWindow = ({ results }) => {
           Results
         </div>
         <div className={styles.results}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+          >
             {results.map((item, index) => (
               <Card key={index} style={{ margin: "10px" }}>
                 <CardHeader
@@ -81,7 +82,7 @@ export const ResultsWindow = ({ results }) => {
                   }
                 />
                 <Text>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>
+                  <div style={{ whiteSpace: "pre-wrap", fontSize: "1.25rem" }}>
                     {item.report}
                   </div>
                 </Text>
@@ -93,15 +94,13 @@ export const ResultsWindow = ({ results }) => {
     );
   }
 
-  
-
   return (
     <div>
       <div className={styles.resultsLabel} id={labelId}>
         Results
       </div>
       <div className={styles.results}>
-        <div style={{height: "100%", textAlign: "center"}}>No results</div>
+        <div style={{ height: "100%", textAlign: "center" }}>No results</div>
       </div>
     </div>
   );
