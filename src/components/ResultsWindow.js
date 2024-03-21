@@ -9,7 +9,9 @@ import {
   Card,
   CardHeader,
   Caption1,
+  Spinner,
 } from "@fluentui/react-components";
+import type { SpinnerProps } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
   resultsLabel: {
@@ -34,8 +36,10 @@ export const ResultsWindow = ({ results }) => {
   
   const styles = useStyles();
   const labelId = useId();
- 
-  if (results.length === 0) {
+  
+  console.log('ResultsWindow - results', results);
+
+  if (results === null) {
     return (
       <div>
         <div className={styles.resultsLabel} id={labelId}>
@@ -48,29 +52,60 @@ export const ResultsWindow = ({ results }) => {
     );
   }
 
+  if (typeof results === "boolean") {
+    return (
+      <div>
+        <div className={styles.resultsLabel} id={labelId}>
+          Results
+        </div>
+        <div className={styles.results}>
+          <div style={{height: "100%", textAlign: "center"}}>
+            <Spinner appearance="primary" label="Loading..." />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
+  if (Array.isArray(results) && results.length !== 0) {
+    return (
+      <div>
+        <div className={styles.resultsLabel} id={labelId}>
+          Results
+        </div>
+        <div className={styles.results}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            {results.map((item, index) => (
+              <Card key={index} style={{ margin: "10px" }}>
+                <CardHeader
+                  header={<Text weight="semibold">{item.name}</Text>}
+                  description={
+                    <Caption1 className={styles.caption}>Summary</Caption1>
+                  }
+                />
+                <Text>
+                  <div style={{ whiteSpace: 'pre-wrap' }}>
+                    {item.report}
+                  </div>
+                </Text>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  
+
   return (
     <div>
       <div className={styles.resultsLabel} id={labelId}>
         Results
       </div>
       <div className={styles.results}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          {results.map((item, index) => (
-            <Card key={index} style={{ margin: "10px" }}>
-              <CardHeader
-                header={<Text weight="semibold">{item.name}</Text>}
-                description={
-                  <Caption1 className={styles.caption}>Summary</Caption1>
-                }
-              />
-              <Text>
-                <div style={{ whiteSpace: 'pre-wrap' }}>
-                  {item.report}
-                </div>
-              </Text>
-            </Card>
-          ))}
-        </div>
+        <div style={{height: "100%", textAlign: "center"}}>No results</div>
       </div>
     </div>
   );
