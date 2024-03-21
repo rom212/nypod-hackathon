@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 });
 
 function App() {
-  const [results, setResults] = React.useState([]);
+  const [results, setResults] = React.useState(null);
   const [selectedOptions, setSelectedOptions] = React.useState([]);
 
   const handleDropdownSelect = (selectedOptions) => {
