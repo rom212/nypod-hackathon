@@ -55,9 +55,7 @@ export const ResultsWindow = ({ results }) => {
           Results
         </div>
         <div className={styles.results}>
-          <div style={{ height: "100%", textAlign: "center" }}>
             <Spinner appearance="primary" label="Loading..." />
-          </div>
         </div>
       </div>
     );
