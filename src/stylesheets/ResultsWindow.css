@@ -24,7 +24,7 @@
     background-color: rgba(171, 143, 99, .2);
     padding: 12px 12px;
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .card {
