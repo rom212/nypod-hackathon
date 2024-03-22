@@ -1,8 +1,14 @@
 .resultsWindow {
     display: flex;
     flex-direction: column;
-    height: 400px
+    height: calc(100vh - 100px);
 }
+
+@media (max-width: 768px) {
+    .resultsWindow {
+      height: calc(100vh - 300px);
+    }
+  }
 
 .resultsLabel {
     color: white;
@@ -19,8 +25,6 @@
     padding: 12px 12px;
     flex-grow: 1;
     overflow-y: scroll;
-    max-height: 80vh
-
 }
 
 .card {

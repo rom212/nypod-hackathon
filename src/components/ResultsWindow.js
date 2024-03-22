@@ -9,7 +9,7 @@ import '../stylesheets/ResultsWindow.css';
 
 const renderResults = (results) => {
     if (results === null) {
-      return <div>Waiting on selection</div>;
+      return <div><Text>Waiting on selection</Text></div>;
     }
   
     if (typeof results === "boolean") {
