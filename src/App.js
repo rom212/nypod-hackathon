@@ -14,6 +14,7 @@ import {
 import { Multiselect } from "./components/Multiselect";
 import { SubmitButton } from "./components/SubmitButton";
 import { ResultsWindow } from "./components/ResultsWindow";
+import { ChatLinkButton } from "./components/ChatLinkButton.js";
 import { CUSTOMERS } from "./constants.js";
 
 function App() {
@@ -26,52 +27,57 @@ function App() {
   };
   return (
     <FluentProvider theme={webLightTheme}>
-        <Container className="container" fluid>
-          <Row className="header mb-3">
-            <Col fluid>
-              <Title1 className="title">NYC Pod Hackathon Project</Title1>
-            </Col>
-          </Row>
-          <Row className="content mb-3">
-            <Col xs={12} md={6}>
-                <Row>
-                  <Col lg={12}>
-                    <Subtitle1 className="subtitle">
-                      Know your customer!
-                    </Subtitle1>
-                    <div></div>
-                    <Text className="description">
-                      Grounded in news and financial reports, this AI-driven account
-                      analysis tool provides fresh insights on your customer,
-                      including their revenue growth, readiness for transformation,
-                      and IT budget spending patterns
-                    </Text>
-                  </Col>
-                </Row>
-                <Row className="mb-3 mt-3">
-                  <Col lg ={12}>
-                    <Stack direction="horizontal" gap={3} className="controls">
-                      <div>
-                        <Multiselect
-                          options={CUSTOMERS}
-                          onOptionSelect={handleDropdownSelect}
-                        />
-                      </div>
-                      <div>
-                        <SubmitButton
-                          selectedOptions={selectedOptions}
-                          setResults={setResults}
-                        />
-                      </div>
-                    </Stack>
-                  </Col>
-                </Row>
-            </Col>
-            <Col xs={12} md={6} className="resultsCol">
-              <ResultsWindow results={results} />
-            </Col>
-          </Row>
-        </Container>
+      <Container className="container" fluid>
+        <Row className="header mb-3">
+          <Col className="d-flex align-items-center">
+            <div className="titleContainer">
+            <Title1 wrap={false} className="title">NYC Pod Hackathon Project</Title1>
+            </div>
+          </Col>
+          <Col className="d-flex align-items-center justify-content-lg-end justify-content-md-end justify-content-sm-end justify-content-xs-start ">
+            <ChatLinkButton />
+          </Col>
+        </Row>
+        <Row className="content mb-3">
+          <Col xs={12} md={6}>
+            <Row>
+              <Col lg={12}>
+                <Subtitle1 className="subtitle">
+                  Know your customer!
+                </Subtitle1>
+                <div></div>
+                <Text className="description">
+                  Grounded in news and financial reports, this AI-driven account
+                  analysis tool provides fresh insights on your customer,
+                  including their revenue growth, readiness for transformation,
+                  and IT budget spending patterns
+                </Text>
+              </Col>
+            </Row>
+            <Row className="mb-3 mt-3">
+              <Col lg={8}>
+                <Stack direction="horizontal" gap={3} className="controls">
+                  <div>
+                    <Multiselect
+                      options={CUSTOMERS}
+                      onOptionSelect={handleDropdownSelect}
+                    />
+                  </div>
+                  <div>
+                    <SubmitButton
+                      selectedOptions={selectedOptions}
+                      setResults={setResults}
+                    />
+                  </div>
+                </Stack>
+              </Col>
+            </Row>
+          </Col>
+          <Col xs={12} md={6} className="resultsCol">
+            <ResultsWindow results={results} />
+          </Col>
+        </Row>
+      </Container>
     </FluentProvider>
   );
 }
