@@ -1,8 +1,19 @@
-.chatLinkButton {
-    white-space: nowrap;
+.chatLinkButton:active {
+    background-color: #8b6508;
     color: #FFFFFF;
 }
 
 .chatLinkButtonWrapper {
     margin: 3px;
+}
+
+.chatLinkButtonWrapper a {
+    background-color: goldenrod;
+    color: #FFFFFF;
+}
+
+.chatLinkButtonWrapper a:hover {
+    /* DarkGoldenrod */
+    background-color: #8b6508;
+    color: #FFFFFF;
 }
